@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .divStyle {
+        background-color: red;
+        width: 30vw;
+        height: 20vh;
+        /* margin: 0 auto; */
+        /* text-align: center; */
+      }
+      /* Ensure nested lists are ordered numerically */
+      ol {
+        list-style-type: decimal;
+      }
+
+      .customClass {
+        background-color: blue;
+        font-size: 10vw;
+      }
+      .btnStyle {
+        display: block;
+        background-color: beige;
+        width: 20vw;
+        height: 10vh;
+        font-size: 3vw;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="ParaId">UpdateThePTag</p>
+    <div class="divStyle">div</div>
+
+    <ol id="list">
+      <li>google</li>
+      <li>Apple</li>
+      <li>worked</li>
+      <li>work</li>
+    </ol>
+  </body>
+  <script>
+    let p = document.getElementById("ParaId");
+    p.innerHTML = "Updated text in para";
+
+    // adding element in the dom
+    let body = document.getElementsByTagName("body")[0];
+
+    let link = document.createElement("a");
+    link.href = "http://google.com";
+    link.innerHTML = "http://apple.com";
+
+    body.appendChild(link);
+
+    // removing element from dom
+    // below are the multiple ways to remove the elemnt
+
+    // link.remove();
+    // element.innerHTML = "";
+    // element.parentNode.removeChild(element);
+
+    // let parent = document.getElementById("parent");
+    // let oldChild = document.getElementById("child");
+    // parent.replaceChild(null, oldChild); // replacechild method
+
+    // let parent = document.getElementById("parent");
+    // let child = document.getElementById("child");
+    // parent.innerHTML = parent.innerHTML.replace(child.outerHTML, ""); // using replace method
+
+    // body.removeChild(link);
+
+    // Remove last element from the list
+    let list = document.getElementsByTagName("ol")[0]; //getElementsByTagName return array of element
+    // let list = document.getElementById("list");
+    console.log("list", list, list.lastElementChild);
+    if (list.lastElementChild) {
+      // Check if there is a last child
+      list.removeChild(list.lastElementChild);
+    }
+
+    //ADDING CLASS AND REMOVING CLASS FROM THE ELEMENT
+
+    link.classList.add("customClass");
+    link.classList.remove("customClass");
+
+    let button = document.createElement("button");
+    body.appendChild(button);
+    button.classList.add("btnStyle");
+    button.innerText = "click Button";
+    button.addEventListener("click", function (event) {
+      p.innerHTML = "clicked the button";
+    });
+
+    button.addEventListener("mouseover", function (event) {
+      button.style.border = "10px solid black";
+    });
+
+    button.addEventListener("mouseleave", function (event) {
+      button.style.border = "0px solid black";
+      button.style.transition = "1s ease-out";
+    });
+  </script>
+</html>
