@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <img
+      src="https://images.unsplash.com/photo-1721657570081-4100f0deab70?q=80&w=3774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      width="200"
+      height="200"
+      alt="saf"
+    />
+    <p>click on image</p>
+
+    <h1>Key Pressed</h1>
+
+    <input type="text" id="myInput" placeholder="Type something..." />
+    <p id="displayParagraph"></p>
+
+    <form id="myForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+      <br />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+
+    <label for="mySelect">Choose an option:</label>
+    <select id="mySelect">
+      <option value="Option 1">Option 1</option>
+      <option value="Option 2">Option 2</option>
+      <option value="Option 3">Option 3</option>
+    </select>
+
+    <h1>Event delegation</h1>
+    <ol id="list">
+      <li id="item1">appple</li>
+      <li id="item2">banana</li>
+      <li id="item3">orange</li>
+      <li id="item4">adfadf</li>
+    </ol>
+    <button id="addItemButton">Add Item</button>
+  </body>
+
+  <script>
+    let image = document.getElementsByTagName("img")[0];
+
+    console.log("image", image);
+    let body = document.getElementsByTagName("body")[0];
+    image.addEventListener("click", function (event) {
+      console.log("imaeg clicked", event);
+      image.src =
+        image.src ===
+        "https://images.unsplash.com/photo-1721657570081-4100f0deab70?q=80&w=3774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          ? "https://plus.unsplash.com/premium_photo-1670148434900-5f0af77ba500?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          : "https://images.unsplash.com/photo-1721657570081-4100f0deab70?q=80&w=3774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+    });
+
+    image.addEventListener("mouseover", function (e) {
+      body.style.backgroundColor = "pink";
+    });
+    image.addEventListener("mouseout", function (e) {
+      body.style.backgroundColor = "grey";
+    });
+
+    //ACT 3 : Key events
+    let h1 = document.querySelector("h1");
+    console.log("====================================");
+    console.log("h1", h1);
+    console.log("====================================");
+
+    window.addEventListener("keydown", function (e) {
+      console.log("keydown alphabet typed", e.key);
+      if (h1.innerHTML == "Key Pressed") h1.innerHTML += " : ";
+      h1.innerHTML += e.key;
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // Select the input field and paragraph
+      const inputField = document.querySelector("#myInput");
+      const displayParagraph = document.querySelector("#displayParagraph");
+
+      // Add a keyup event listener to the input field
+      inputField.addEventListener("keyup", function () {
+        // Get the current value of the input field
+        const currentValue = inputField.value;
+
+        // Display the current value in the paragraph
+        displayParagraph.textContent = currentValue;
+      });
+    });
+
+    //ACT 4 : Form events
+    document.addEventListener("DOMContentLoaded", function () {
+      // Select the form
+      const form = document.querySelector("#myForm");
+
+      // Add a submit event listener to the form
+      form.addEventListener("submit", function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Create a FormData object from the form
+        const formData = new FormData(form);
+
+        // Log the form data to the console
+        formData.forEach((value, key) => {
+          console.log(`${key}: ${value}`);
+        });
+      });
+    });
+
+    //ACT 4 Task 8 : Form events
+    document.addEventListener("DOMContentLoaded", function () {
+      // Select the dropdown and paragraph elements
+      const selectDropdown = document.querySelector("#mySelect");
+      const displayParagraph = document.querySelector("#displayParagraph");
+
+      // Add a change event listener to the dropdown
+      selectDropdown.addEventListener("change", function () {
+        // Get the selected value
+        const selectedValue = selectDropdown.value;
+
+        // Display the selected value in the paragraph
+        displayParagraph.textContent = `Selected: ${selectedValue}`;
+      });
+    });
+
+    //Act 5 Event delegation
+
+    const list = document.querySelector("#list");
+    console.log("list", list);
+    list.addEventListener("click", function (e) {
+      e.preventDefault();
+      console.log("e", e.target.id && e.target.nodeName === "LI");
+
+      if (e.target.id && e.target.nodeName === "LI") {
+        let elemntClicked = e.target;
+        console.log("elemntClicked", elemntClicked);
+        elemntClicked.style.textDecoration = elemntClicked.style.textDecoration === "line-through" ? "none" : "line-through";
+      }
+    });
+
+    //Task 10 dynamically add list item
+
+    // Function to add a new list item
+    function addItem() {
+      const newItem = document.createElement("li");
+      newItem.textContent = `Item ${list.children.length + 1}`;
+      newItem.id = `item${list.children.length + 1}`;
+      list.appendChild(newItem);
+    }
+
+    // Add click event listener to the button to add new items
+    const addItemButton = document.querySelector("#addItemButton");
+    addItemButton.addEventListener("click", addItem);
+  </script>
+</html>
