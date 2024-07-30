@@ -27,3 +27,31 @@ Note:
 Parameters are declared in the function definition.
 
 Arguments are provided during the function call.
+
+**Day 09**
+
+Using rel="noopener" in a link tag is necessary for security and performance reasons, especially when the link opens in a new tab or window. Here’s a detailed explanation:
+
+1. Security
+
+Prevent Tabnabbing: Without rel="noopener", the newly opened page can potentially gain access to the original page via window.opener.
+
+This access can be exploited by malicious pages to change the location of the original page (i.e., redirect it to a phishing site), which is known as "tabnabbing".
+
+Example of a phishing attack: if no opener is not used
+
+if (window.opener) { window.opener.location = "https://phishing-site.com"; }
+
+2. Performance Improvement:
+
+When a new tab or window is opened without rel="noopener", the original page maintains a reference to the new page, which can increase memory usage.
+
+Using rel="noopener" breaks this reference, reducing memory overhead and improving performance.
+
+Correct way to usage `<a href="https://www.example.com" target="_blank" rel="noopener noreferrer">Visit Example</a>`
+
+**Day 11** Promise => eventually completion object
+
+Async and await cannot catch errors so Therefore, we wrap Try and catch to catch error case
+
+then -> resolve and catch -> reject handles error case automatically
