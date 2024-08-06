@@ -55,3 +55,12 @@ Correct way to usage `<a href="https://www.example.com" target="_blank" rel="noo
 Async and await cannot catch errors so Therefore, we wrap Try and catch to catch error case
 
 then -> resolve and catch -> reject handles error case automatically
+
+
+if i add two string element like 
+
+typeof("1" + "0" + 0); -> string
+
+typeof("1" + "0" - 0); -> number
+
+When the - operator is used, JavaScript tries to convert the string to a number. The string "10" is successfully converted to the number 
