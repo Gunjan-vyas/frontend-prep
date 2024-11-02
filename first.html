@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        height: 200vh;
+        position: relative;
+      }
+
+      .container {
+        /*   color: white; */
+        font-size: 4vw;
+        width: 40vw;
+        margin-top: 40vh;
+
+        color: rgba(255, 255, 255, 0.15);
+      }
+
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        overflow: hidden;
+        padding: 20px;
+        background-color: white;
+        background: radial-gradient(circle at 50% 50%, rgba(255, 255, 0, 0.5), rgba(255, 255, 0, 0));
+        transition: background-position 0.1s ease;
+      }
+      .container span {
+        transition: color 0.5s ease;
+        position: relative;
+        z-index: 2;
+      }
+      .circle {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(circle, rgba(255, 255, 0, 0.5), rgba(255, 255, 0, 0));
+        pointer-events: none;
+        mix-blend-mode: overlay;
+        transition: left 0.1s ease, top 0.1s ease;
+      }
+    </style>
+    <title>Scroll and Hover Animation</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="circle"></div>
+    </div>
+
+    <script>
+      let container = document.querySelector(".container");
+
+      let string = `Hello its me Gunjan! Let's Understand Cred company's landing page cred.club Awesome UI animation on user scroll`;
+
+      let eachWord = string.split(" ");
+      console.log(string, eachWord);
+
+      eachWord.map((item, key) => {
+        let span = document.createElement("span");
+        span.innerText = item + " ";
+        console.log("span", span);
+        container.appendChild(span);
+
+        // Adding hover effect for spotlight animation
+        span.addEventListener("mouseover", () => {
+          span.classList.add("spotlight");
+        });
+        span.addEventListener("mouseout", () => {
+          span.classList.remove("spotlight");
+        });
+      });
+
+      let lastKnownScrollPosition = 0;
+      let index = 0;
+      let spanArray = document.querySelectorAll("span");
+
+      window.addEventListener("scroll", function (e) {
+        let currentScrollPosition = window.scrollY;
+        console.log("currentScrollPosition", currentScrollPosition, lastKnownScrollPosition);
+        if (currentScrollPosition > lastKnownScrollPosition + 2) {
+          // Scrolling down
+          if (index < spanArray.length) {
+            spanArray[index].style.color = "red";
+            index++;
+          }
+        } else if (currentScrollPosition + 2 < lastKnownScrollPosition) {
+          // Scrolling up
+          if (index > 0) {
+            index--;
+            spanArray[index].style.color = "white";
+          }
+        }
+
+        lastKnownScrollPosition = currentScrollPosition;
+      });
+
+      container.addEventListener("mousemove", function (e) {
+        console.log("e", e.clientX, e.clientY);
+        let circle = document.querySelector(".circle");
+        console.log("c", circle);
+        circle.style.left = `${e.clientX - 50}px`;
+        circle.style.top = `${e.clientY - 50}px`;
+      });
+    </script>
+  </body>
+</html>
