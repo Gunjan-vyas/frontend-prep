@@ -64,3 +64,10 @@ typeof("1" + "0" + 0); -> string
 typeof("1" + "0" - 0); -> number
 
 When the - operator is used, JavaScript tries to convert the string to a number. The string "10" is successfully converted to the number 
+
+
+() vs {} 
+
+() is typically used for JSX to make the return value more readable and to prevent automatic semicolon insertion errors.
+
+{} is used when returning or evaluating normal JavaScript expressions or when you need to write more complex logic inside the return statement.
