@@ -16,6 +16,7 @@ once 30days js complets/100days complete -> go for Blind 75 sheet
 
 find a group fast  
 open source project 
-mern kar lo
-indepth padho jo bhi 
+MERN
+RTC
+WEBRTC
 -->
