@@ -671,6 +671,7 @@ typeof NaN // "number"
 ```
 
 ---
+![Alt text]
 
 ## 6. Why `{}` == `{}` is `false`
 
